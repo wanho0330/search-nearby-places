@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <!-- Header 설정 -->
 <th:block th:replace="fragment/head :: headFragment"></th:block>
 <body>
@@ -9,11 +9,11 @@
 
 <div class="container">
 
-        <div class="text-center mt-5">
-            <h1 th:text="Restaunt-Name"></h1>
-            <p class="lead">Address : 서울-광진구-자양동-무슨빌라-1층</p>
-            <p class="lead">Tel : 02-123-4567</p>
-            <p><a href="">Edit</a></p>
+        <div class="text-center mt-5"  th:if="${response?:false}">
+            <h1 th:text="${response?.name}"></h1>
+            <p class="lead" th:text="${response?.address}"></p>
+            <p class="lead" th:text="${response?.tel}"></p>
+            <p><a th:href="@{/place/edit(id=${response.id})}">Edit</a></p>
         </div>
 </div>
 

@@ -10,30 +10,33 @@
 
 <div class="form-body">
     <main class="form-signin text-center">
-        <form>
+        <form th:action="@{|/place/${response?.id}|}" th:method="put">
             <img class="mb-4" src="/img/spring-security.png" alt="" width="72" height="57" />
-            <h1 class="h3 mb-3 fw-normal">Write Restaurant Info</h1>
+            <h1 class="h3 mb-3 fw-normal">Edit Restaurant Info</h1>
+
+
 
             <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInput" placeholder="Restaurant Name" />
-                <label for="floatingInput">Restaurant Name</label>
+                <input type="text" class="form-control" id="floatingInput" name="name" />
+                <label for="floatingInput" th:text="${response?.name}"></label>
             </div>
             <div class="form-floating">
-                <input type="text" class="form-control" id="floatingAddress" placeholder="Address" />
-                <label for="floatingAddress">Address</label>
+                <input type="text" class="form-control" id="floatingAddress" name="address"/>
+                <label for="floatingAddress" th:text="${response?.address}"></label>
             </div>
             <div class="form-floating">
-                <input type="tel" class="form-control" id="floatingTel" placeholder="Tel" />
-                <label for="floatingAddress">Tel</label>
+                <input type="tel" class="form-control" id="floatingTel" name="tel"/>
+                <label for="floatingAddress" th:text="${response?.tel}"></label>
             </div>
 
             </br></br>
 
             <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
             </br></br>
+        </form>
 
-            <a href="#">delete</a>
-
+        <form th:action="@{|/place/${response?.id}|}" th:method="delete">
+            <button class="w-100 btn btn-lg btn-secondary" type="submit">Delete</button>
         </form>
     </main>
 
