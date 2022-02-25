@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- Header 설정 -->
+<th:block th:replace="fragment/head :: headFragment"></th:block>
+<body>
+
+<!-- Nav 설정 -->
+<th:block th:replace="fragment/nav :: navFragment"></th:block>
+
+<div class="container">
+
+        <div class="text-center mt-5">
+            <h1 th:text="Restaunt-Name"></h1>
+            <p class="lead">Address : 서울-광진구-자양동-무슨빌라-1층</p>
+            <p class="lead">Tel : 02-123-4567</p>
+            <p><a href="">Edit</a></p>
+        </div>
+</div>
+
+
+<!-- Footer 설정 -->
+<th:block th:replace="fragment/footer :: footerFragment"></th:block>
+</body>
+</html>
