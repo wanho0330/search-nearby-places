@@ -3,14 +3,14 @@
 <head>
     <th:block th:replace="fragment/head :: headFragment"></th:block>
     <!-- Bootstrap core CSS -->
-    <link href="/css/signin.css" rel="stylesheet"/>
+
 </head>
-<body class="text-center">
+<body class="text-center form-body">
 
 <main class="form-signin">
     <form>
         <img class="mb-4" src="/img/spring-security.png" alt="" width="72" height="57" />
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <h1 class="h3 mb-3 fw-normal">Login</h1>
 
         <div class="form-floating">
             <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
@@ -26,14 +26,13 @@
                 <input type="checkbox" value="remember-me"> Remember me </input>
             </label>
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
         </br>
         </br>
-        <a href="#">sing-up</a>
+        <a href="member/signup.html">sing-up</a>
 
     </form>
 </main>
-
 
 </body>
 </html>
