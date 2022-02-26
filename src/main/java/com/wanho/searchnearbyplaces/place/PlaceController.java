@@ -14,11 +14,7 @@ public class PlaceController {
     private final PlaceService placeService;
 
     @GetMapping
-    public String getPlace(@RequestParam(required = false) Long id, Model model) {
-        if(id != null) {
-            PlaceDto.Response response = placeService.findById(id);
-            model.addAttribute("response", response);
-        }
+    public String root() {
         return "place/detail";
     }
 
