@@ -17,16 +17,16 @@
 
 
             <div class="form-floating">
-                <input type="text" class="form-control" id="floatingInput" name="name" />
-                <label for="floatingInput" th:text="${response?.name}"></label>
+                <input type="text" class="form-control" id="floatingInput" name="name" th:value="${response?.name}"/>
+                <label for="floatingInput">Restaurant Name</label>
             </div>
             <div class="form-floating">
-                <input type="text" class="form-control" id="floatingAddress" name="address"/>
-                <label for="floatingAddress" th:text="${response?.address}"></label>
+                <input type="text" class="form-control" id="floatingAddress" name="address" th:value="${response?.address}"/>
+                <label for="floatingAddress">Address</label>
             </div>
             <div class="form-floating">
-                <input type="tel" class="form-control" id="floatingTel" name="tel"/>
-                <label for="floatingAddress" th:text="${response?.tel}"></label>
+                <input type="tel" class="form-control" id="floatingTel" name="tel" th:value="${response?.tel}"/>
+                <label for="floatingAddress">Tel</label>
             </div>
 
             </br></br>

@@ -1,5 +1,6 @@
 package com.wanho.searchnearbyplaces.place;
 
+import com.wanho.searchnearbyplaces.user.User;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -30,13 +31,12 @@ public class Place {
     // 장소 전화번호
     private String tel;
 
-    /*
-    // 사업자 고유 아이디
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "OWNER_ID")
-    private Owner owner;
 
-     */
+    // 사업자 고유 아이디
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID")
+    private User user;
+
 
     // 장소 사업자 번호
     private String ownerPlaceNumber;

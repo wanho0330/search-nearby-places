@@ -1,6 +1,7 @@
 package com.wanho.searchnearbyplaces.place;
 
 
+import com.wanho.searchnearbyplaces.user.User;
 import lombok.*;
 
 
@@ -16,6 +17,7 @@ public class PlaceDto {
         private String address;
         private String tel;
         private String ownerPlaceNumber;
+        private User user;
     }
 
     @Getter

@@ -8,28 +8,29 @@
 <body class="text-center form-body">
 
 <main class="form-signin">
-    <form>
+    <form th:action="@{/login}" th:method="post">
         <img class="mb-4" src="/img/spring-security.png" alt="" width="72" height="57" />
         <h1 class="h3 mb-3 fw-normal">Login</h1>
 
         <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" />
+            <!-- 이름에 따라 userDetailsService 구현해줘야함 -->
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="username" />
             <label for="floatingInput">Email address</label>
         </div>
         <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" />
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" />
             <label for="floatingPassword">Password</label>
         </div>
 
         <div class="checkbox mb-3">
             <label>
-                <input type="checkbox" value="remember-me"> Remember me </input>
+                <input type="checkbox" name="remember-me" id="remember-me" value="remember-me"> Remember me </input>
             </label>
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
         </br>
         </br>
-        <a href="member/signup.html">sing-up</a>
+        <a href="user/signup">sing-up</a>
 
     </form>
 </main>

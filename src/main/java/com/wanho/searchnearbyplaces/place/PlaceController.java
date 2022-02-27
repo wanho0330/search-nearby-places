@@ -1,7 +1,9 @@
 package com.wanho.searchnearbyplaces.place;
 
 
+import com.wanho.searchnearbyplaces.user.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ public class PlaceController {
 
     @GetMapping
     public String root() {
+
         return "place/detail";
     }
 

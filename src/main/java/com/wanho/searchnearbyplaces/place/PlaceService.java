@@ -2,11 +2,15 @@ package com.wanho.searchnearbyplaces.place;
 
 import com.wanho.searchnearbyplaces.place.PlaceDto.Request;
 import com.wanho.searchnearbyplaces.place.PlaceDto.Response;
+import com.wanho.searchnearbyplaces.user.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,15 +25,14 @@ public class PlaceService {
     }
 
     @Transactional
-    public Response savePlace(Request request) {
+    public Response savePlace(User user, Request request) {
+        request.setUser(user);
         return entityToResponse(placeRepository.save(requestToEntity(request)));
     }
 
     @Transactional
-    public Response editPlace(Request request, Long id) {
-
-        Place place = findPlaceById(id);
-
+    public Response editPlace(User user, Request request, Long id) {
+        Place place = findPlaceByUserAndId(user, id);
 
         place.setName(request.getName());
         place.setAddress(request.getAddress());
@@ -39,16 +42,29 @@ public class PlaceService {
     }
 
     @Transactional
-    public Boolean deletePlace(Long id) {
-        Place place = findPlaceById(id);
-
+    public Boolean deletePlace(User user, Long id) {
+        Place place = findPlaceByUserAndId(user, id);
         if (place == null) {
             return false;
         }
 
         placeRepository.delete(place);
-
         return true;
+    }
+
+    @Transactional
+    public List<Response> findPlacesByUser(User user) {
+
+
+        List<Place> places = placeRepository.findByUserOrderByIdDesc(user);
+
+        List<Response> responses = new ArrayList<>();
+
+        for (Place place : places) {
+            responses.add(entityToResponse(place));
+        }
+
+        return responses;
     }
 
 
@@ -57,8 +73,8 @@ public class PlaceService {
      *   - Place를 리턴하여 수정 및 삭제가 가능하도록 함.
      *   - 필요 없는 정보는 감추기 위해 ResponseDto를 사용하기 때문에 필요함.
      */
-    private Place findPlaceById(Long id) {
-        return placeRepository.findById(id).orElseThrow();
+    private Place findPlaceByUserAndId(User user, Long id) {
+        return placeRepository.findByUserAndId(user, id);
     }
 
 
@@ -71,6 +87,7 @@ public class PlaceService {
                 .address(request.getAddress())
                 .tel(request.getTel())
                 .ownerPlaceNumber(request.getOwnerPlaceNumber())
+                .user(request.getUser())
                 .build();
     }
 

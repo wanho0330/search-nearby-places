@@ -1,0 +1,7 @@
+### Send POST request with json body
+PUT http://localhost:8080/place/1
+Content-Type: application/json
+
+{
+  "name" :  "AAA mart"
+}

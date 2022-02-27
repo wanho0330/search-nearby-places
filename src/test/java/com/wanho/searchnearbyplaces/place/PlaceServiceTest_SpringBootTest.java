@@ -36,19 +36,6 @@ class PlaceServiceTest_SpringBootTest {
 
 
     @Test
-    void editPlace() {
-        // given
-        Place place = placeRepository.save(defaultPlace);
-
-        // when
-        PlaceDto.Response response = placeService.editPlace(defaultRequest, 1L);
-
-        // then
-        then(response.getId()).isEqualTo(1L);
-        then(response.getName()).isEqualTo("신전 떡볶이");
-    }
-
-    @Test
     void deletePlace() {
     }
 }
