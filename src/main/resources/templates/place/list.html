@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!-- Header 설정 -->
+<th:block th:replace="fragment/head :: headFragment"></th:block>
+<body style="background-color: #f5f5f5">
+
+<!-- Nav 설정 -->
+<th:block th:replace="fragment/nav :: navFragment"></th:block>
+
+
+<div class="container">
+
+    <table class="table">
+        <tr>
+            <th>가게명</th>
+            <th>전화번호</th>
+            <th>#</th>
+        </tr>
+        <tr th:each="response : ${responses}" >
+            <td th:text="${response.name}">
+            </td>
+            <td th:text="${response.tel}">
+            </td>
+            <td><a th:href="@{|/place/${response.id}|}" th:text="상세보기" />
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!-- Footer 설정 -->
+<th:block th:replace="fragment/footer :: footerFragment"></th:block>
+</body>
+</html>

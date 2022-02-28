@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -26,12 +27,12 @@ public class PlaceApiController {
     }
 
     @PostMapping
-    public ModelAndView savePlace(Authentication authentication, @ModelAttribute PlaceDto.Request request) {
+    public ModelAndView savePlace(Authentication authentication,@ModelAttribute PlaceDto.Request request) {
         User user = (User) authentication.getPrincipal();
 
         PlaceDto.Response response = placeService.savePlace(user, request);
 
-        return new ModelAndView("redirect:/place/" + response.getId());
+        return new ModelAndView("redirect:/place/list");
     }
 
     @PutMapping("/{id}")
@@ -47,17 +48,7 @@ public class PlaceApiController {
         User user = (User) authentication.getPrincipal();
         placeService.deletePlace(user, id);
 
-        return new ModelAndView("redirect:/place");
+        return new ModelAndView("redirect:/place/list");
     }
 
-    // ajax로 처리 필요
-    @GetMapping("/list")
-    public ModelAndView getPlace(Model model, Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
-        List<PlaceDto.Response> responses = placeService.findPlacesByUser(user);
-
-        model.addAttribute("responses", responses);
-
-        return new ModelAndView("place/detail");
-    }
 }

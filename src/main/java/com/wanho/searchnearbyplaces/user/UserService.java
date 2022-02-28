@@ -1,11 +1,15 @@
 package com.wanho.searchnearbyplaces.user;
 
 import com.wanho.searchnearbyplaces.place.Place;
+import com.wanho.searchnearbyplaces.user.UserDto.Request;
+import com.wanho.searchnearbyplaces.user.UserDto.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
+import static com.wanho.searchnearbyplaces.user.UserDto.Request.requestToEntity;
 
 @Service
 @RequiredArgsConstructor
@@ -16,48 +20,32 @@ public class UserService {
 
 
     @Transactional
-    public UserDto.Response signup(UserDto.Request request) {
-        User user = User.builder()
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .authority("ROLE_OWNER")
-                .build();
+    public Response signup(Request request) {
+        User user = requestToEntity(request);
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        userRepository.save(user);
-
-        UserDto.Response response = UserDto.Response.builder()
-                .email(request.getEmail())
-                .build();
-
-        return response;
-
+        return Response.entityToResponse(userRepository.save(user));
     }
 
 
     @Transactional
-    public UserDto.Response edit(User user, UserDto.Request request) {
+    public Response edit(User authUser, Request request) {
 
-        User byEmail = userRepository.findByEmail(user.getEmail());
-        byEmail.setPassword(passwordEncoder.encode(request.getPassword()));
+        User user = userRepository.findByEmail(authUser.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        userRepository.save(user);
-
-        UserDto.Response response = UserDto.Response.builder()
-                .email(user.getEmail())
-                .build();
-
-        return response;
+        return Response.entityToResponse(userRepository.save(user));
     }
 
     @Transactional
-    public Boolean delete(User user) {
+    public Boolean delete(User authUser) {
 
-        User byEmail = userRepository.findByEmail(user.getEmail());
-        if ( byEmail == null) {
+        User user = userRepository.findByEmail(authUser.getEmail());
+        if ( user == null) {
             return false;
         }
 
-        userRepository.delete(byEmail);
+        userRepository.delete(user);
         return true;
     }
 
