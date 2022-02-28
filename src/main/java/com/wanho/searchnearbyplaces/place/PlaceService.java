@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.wanho.searchnearbyplaces.place.PlaceDto.Request.requestToEntity;
+import static com.wanho.searchnearbyplaces.place.PlaceDto.Response.entityToResponse;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -78,31 +81,7 @@ public class PlaceService {
     }
 
 
-    /*
-     *   Mapper 함수 ( PlaceDto.Request > Place )
-     */
-    private Place requestToEntity(Request request) {
-        return Place.builder()
-                .name(request.getName())
-                .address(request.getAddress())
-                .tel(request.getTel())
-                .ownerPlaceNumber(request.getOwnerPlaceNumber())
-                .user(request.getUser())
-                .build();
-    }
 
-    /*
-     *   Mapper 함수 ( Place > PlaceDto.Response )
-     */
-    private Response entityToResponse(Place place) {
-        return Response.builder()
-                .id(place.getId())
-                .name(place.getName())
-                .address(place.getAddress())
-                .tel(place.getTel())
-                .ownerPlaceNumber(place.getOwnerPlaceNumber())
-                .build();
-    }
 
 
 }

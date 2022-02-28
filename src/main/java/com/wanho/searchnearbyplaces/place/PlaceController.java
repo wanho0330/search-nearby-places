@@ -7,6 +7,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -18,7 +21,7 @@ public class PlaceController {
     @GetMapping
     public String root() {
 
-        return "place/detail";
+        return "place/list";
     }
 
 
@@ -38,6 +41,15 @@ public class PlaceController {
     }
 
 
+    @GetMapping("/list")
+    public ModelAndView getPlace(Model model, Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        List<PlaceDto.Response> responses = placeService.findPlacesByUser(user);
+
+        model.addAttribute("responses", responses);
+
+        return new ModelAndView("place/list");
+    }
 
 
 }
