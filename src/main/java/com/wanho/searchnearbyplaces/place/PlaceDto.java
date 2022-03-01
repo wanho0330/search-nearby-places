@@ -15,9 +15,12 @@ public class PlaceDto {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Request {
+        @NotNull
         private String name;
+        @NotNull
         private String address;
         private String tel;
+        @NotNull
         private String ownerPlaceNumber;
         private User user;
 

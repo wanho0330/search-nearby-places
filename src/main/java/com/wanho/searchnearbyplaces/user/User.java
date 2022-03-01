@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -25,7 +26,9 @@ public class User implements UserDetails {
     @GeneratedValue
     private Long id;
 
+    @NotNull
     private String email;
+    @NotNull
     private String password;
     private String authority;
 
