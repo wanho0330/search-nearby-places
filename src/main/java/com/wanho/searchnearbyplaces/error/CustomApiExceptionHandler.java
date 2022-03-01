@@ -2,7 +2,6 @@ package com.wanho.searchnearbyplaces.error;
 
 
 import com.wanho.searchnearbyplaces.constant.ErrorCode;
-import com.wanho.searchnearbyplaces.place.PlaceApiController;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

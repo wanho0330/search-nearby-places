@@ -57,10 +57,17 @@ public class PlaceService {
 
     @Transactional
     public List<Response> findPlacesByUser(User user) {
+        return PlacesToResponses(placeRepository.findByUserOrderByIdDesc(user));
+    }
 
+    @Transactional
+    public List<Response> findPlacesByAddressContaining(String address) {
 
-        List<Place> places = placeRepository.findByUserOrderByIdDesc(user);
+        return PlacesToResponses(placeRepository.findByAddressContaining(address));
 
+    }
+
+    private List<Response> PlacesToResponses(List<Place> places) {
         List<Response> responses = new ArrayList<>();
 
         for (Place place : places) {
@@ -68,8 +75,8 @@ public class PlaceService {
         }
 
         return responses;
-    }
 
+    }
 
     /*
      *   Place Entity를 얻기 위한 함수 ( id > Place )

@@ -11,5 +11,8 @@ import java.util.Optional;
 public interface PlaceRepository extends JpaRepository<Place, Long> {
 
     List<Place> findByUserOrderByIdDesc(User user);
+    List<Place> findByAddressContaining(String address);
+
     Place findByUserAndId(User user, Long id);
+
 }

@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/place")
-public class PlaceApiController {
+public class PlaceRestController {
 
     private final PlaceService placeService;
 
@@ -27,7 +27,7 @@ public class PlaceApiController {
     }
 
     @PostMapping
-    public ModelAndView savePlace(Authentication authentication,@ModelAttribute PlaceDto.Request request) {
+    public ModelAndView savePlace(Authentication authentication,@ModelAttribute @Valid PlaceDto.Request request) {
         User user = (User) authentication.getPrincipal();
 
         PlaceDto.Response response = placeService.savePlace(user, request);
@@ -36,7 +36,7 @@ public class PlaceApiController {
     }
 
     @PutMapping("/{id}")
-    public ModelAndView editPlace(@ModelAttribute PlaceDto.Request request,@PathVariable Long id, Authentication authentication) {
+    public ModelAndView editPlace(@ModelAttribute @Valid PlaceDto.Request request,@PathVariable Long id, Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         PlaceDto.Response response = placeService.editPlace(user, request, id);
 
@@ -51,4 +51,9 @@ public class PlaceApiController {
         return new ModelAndView("redirect:/place/list");
     }
 
+
+    @GetMapping("/search")
+    public List<PlaceDto.Response> getPlaces(@RequestParam String address) {
+        return placeService.findPlacesByAddressContaining(address);
+    }
 }

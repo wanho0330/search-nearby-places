@@ -8,7 +8,7 @@ import static org.assertj.core.api.BDDAssertions.then;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class UserApiControllerTest {
+class UserRestControllerTest {
 
     @Autowired
     private UserService userService;

@@ -10,20 +10,20 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
-public class UserApiController {
+public class UserRestController {
 
 
     private final UserService userService;
 
     @PostMapping
-    public ModelAndView signUp(@ModelAttribute UserDto.Request request) {
+    public ModelAndView signUp(@ModelAttribute @Valid UserDto.Request request) {
         userService.signup(request);
 
         return new ModelAndView("redirect:/");
     }
 
     @PutMapping
-    public ModelAndView edit(@ModelAttribute UserDto.Request request, Authentication authentication) {
+    public ModelAndView edit(@ModelAttribute @Valid UserDto.Request request, Authentication authentication) {
         User authUser = (User) authentication.getPrincipal();
         userService.edit(authUser, request);
         return new ModelAndView("redirect:/place");
